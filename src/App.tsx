@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { useCollection } from "@omg-dev/sdk"
+import { useLocalCollection } from "@/lib/use-local-collection"
 import {
   Check,
   Flame,
@@ -268,14 +268,12 @@ function App() {
   const lesson = lessons.find((l) => l.id === openId) ?? null
   const [editingProfile, setEditingProfile] = useState(false)
 
-  const { data: progress, create, update } = useCollection<Progress & { id: string }>({
+  const { data: progress, create, update } = useLocalCollection<Progress & { id: string }>({
     collection: "progress",
-    api: "/api/progress",
   })
 
-  const { data: profiles, loading: profileLoading, create: createProfile, update: updateProfile } = useCollection<Profile & { id: string }>({
+  const { data: profiles, loading: profileLoading, create: createProfile, update: updateProfile } = useLocalCollection<Profile & { id: string }>({
     collection: "profile",
-    api: "/api/profile",
   })
   const profileRow = profiles[0] ?? null
 
